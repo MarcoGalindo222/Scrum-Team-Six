@@ -1,4 +1,5 @@
- import React from "react";
+
+ import React, {useState} from 'react'
 
  // We use Route in order to define the different routes of our application
  import { Route, Routes } from "react-router-dom";
@@ -10,15 +11,30 @@
  import Create from "./components/create";
 
  const App = () => {
+  const [data,setData]=useState(null);
+  const [print,setPrint]=useState(false);
+  function getData(val)
+  {
+  	setData(val.target.value)
+  	setPrint(false)
+  	console.warn(val.target.value) //Remove in final implementation
+  }
   return (
     <div>
       <Navbar />
+      
       <Routes>
         <Route exact path="/" element={<RecordList />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
       </Routes>
-      <p>Test Paragraph</p>
+      
+      <h1> {data} </h1>
+      <p>(copy of data read by input box for testing purposes only)</p>
+
+      <input type="text" onChange={getData} />
+      <button onClick={()=>setPrint(true)} >Submit</button>
+
     </div>
   );
  };
