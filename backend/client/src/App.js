@@ -1,5 +1,5 @@
 
- import React, {useState} from 'react'
+ import React from 'react'
 
  // We use Route in order to define the different routes of our application
  import { Route, Routes } from "react-router-dom";
@@ -10,33 +10,60 @@
  import Edit from "./components/edit";
  import Create from "./components/create";
 
- const App = () => {
-  const [data,setData]=useState(null);
-  const [print,setPrint]=useState(false);
-  function getData(val)
-  {
-  	setData(val.target.value)
-  	setPrint(false)
-  	console.warn(val.target.value) //Remove in final implementation
-  }
-  return (
-    <div>
-      <Navbar />
-      
-      <Routes>
-        <Route exact path="/" element={<RecordList />} />
-        <Route path="/edit/:id" element={<Edit />} />
-        <Route path="/create" element={<Create />} />
-      </Routes>
-      
-      <h1> {data} </h1>
-      <p>(copy of data read by input box for testing purposes only)</p>
-
-      <input type="text" onChange={getData} />
-      <button onClick={()=>setPrint(true)} >Submit</button>
-
-    </div>
-  );
- };
+class App extends React.Component
+{
+	fields = {
+		value: '',
+		email: '',
+		password: '',
+	}
+	
+	getValue = (event) =>
+	{
+		const name = event.target.name;
+		const value = event.target.value;
+		
+		this.setState({ [name]: value });
+	}
+	
+	submitHandler = (event) =>
+	{
+		event.preventDefault();
+		const email = this.state.email;
+		const password = this.state.password;
+		
+		console.log('Email on submit: ', email);
+		console.log('Password on Submit: ', password);
+	}
+	
+	render() //HTML like code
+	{
+		console.log('State: ', this.state);
+		return(
+			<div>
+				<h1>Input Test</h1>
+				
+				<form action = "">
+					<div>
+						<label htmlFor = ""></label>
+						<input type = "email" onChange = {this.getValue} name = 'email'/>
+					</div>
+					
+					<div>
+						<label htmlFor = ""></label>
+						<input type = "password" onChange = {this.getValue} name = 'password'/>
+					</div>
+					
+					<div>
+						<label htmlFor = ""></label>
+						<input type = "Account ID" onChange = {this.getValue} name = 'Account ID'/>
+					</div>
+					
+					<button onClick = {this.submitHandler} >Submit</button>
+				</form>
+			</div>
+		);
+	}
+}
 
  export default App;
