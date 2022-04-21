@@ -14,7 +14,7 @@
     <div>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<RecordList />} />
+        <Route exact path="/recordList" element={<RecordList />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
       </Routes>
