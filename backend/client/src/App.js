@@ -3,6 +3,8 @@
 
  // We use Route in order to define the different routes of our application
  import { Route, Routes } from "react-router-dom";
+ import { useNavigate } from "react-router-dom";
+ import { BrowserRouter as Redirect } from "react-router-dom";
 
  // We import all the components we need in our app
  import Navbar from "./components/navbar";
@@ -34,12 +36,14 @@ class App extends React.Component
 		
 		console.log('Email on submit: ', email);
 		console.log('Password on Submit: ', password);
+		window.location.href = "http://localhost:3000";
 	}
 	
 	render() //HTML like code
 	{
 		console.log('State: ', this.state);
 		return(
+     		
 			<div>
 				<h1>Input Test</h1>
 				
